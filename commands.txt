@@ -1,0 +1,5 @@
+Create new key & certificate request:
+# openssl req -newkey rsa:2048 -nodes -out x.csr -keyout x.key
+
+Sign certificate request:
+> ca -sign x.csr
