@@ -44,7 +44,7 @@ goto :EOF
 :newcert
 REM create a certificate
 echo Error: untested
-got :EOF
+goto :EOF
 %REQ% -new -x509 -keyout newkey.pem -out newcert.pem -days %DAYS%
 echo Certificate is in newcert.pem, private key is in newkey.pem
 goto :EOF
@@ -52,7 +52,7 @@ goto :EOF
 :newreq
 REM create a certificate request
 echo Error: untested
-got :EOF
+goto :EOF
 %REQ% -new -keyout newkey.pem -out newreq.pem -days %DAYS%
 echo Request is in newreq.pem, private key is in newkey.pem
 goto :EOF
@@ -60,7 +60,7 @@ goto :EOF
 :newrequest-nodes
 REM create a certificate request
 echo Error: untested
-got :EOF
+goto :EOF
 %REQ% -new -nodes -keyout newkey.pem -out newreq.pem -days %DAYS%
 echo Request is in newreq.pem, private key is in newkey.pem
 
@@ -80,7 +80,7 @@ goto :EOF
 
 :pkcs12
 echo Error: untested
-got :EOF
+goto :EOF
 set cname = %1
 %PKCS12% -in newcert.pem -inkey newkey.pem -certfile ${CATOP}\$CACERT -out newcert.p12 -export -name %cname%
 echo PKCS #12 file is in newcert.p12
@@ -88,7 +88,7 @@ goto :EOF
 
 :xsign
 echo Error: untested
-got :EOF
+goto :EOF
 %CA% -policy policy_anything -infiles newreq.pem
 goto :EOF
 
@@ -99,14 +99,14 @@ goto :EOF
 
 :signca
 echo Error: untested
-got :EOF
+goto :EOF
 %CA% -policy policy_anything -out newcert.pem -extensions v3_ca -infiles newreq.pem
 echo Signed CA certificate is in newcert.pem
 goto :EOF
 
 :signcert
 echo Error: untested
-got :EOF
+goto :EOF
 %X509% -x509toreq -in newreq.pem -signkey newreq.pem -out tmp.pem
 %CA% -policy policy_anything -out newcert.pem -infiles tmp.pem
 echo Signed certificate is in newcert.pem
